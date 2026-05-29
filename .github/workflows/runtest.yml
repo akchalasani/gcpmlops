@@ -12,6 +12,9 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: "3.9"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"        # ← add this before setup-cml
       - uses: iterative/setup-cml@v2
       - name: run unit tests
         run: |
@@ -24,7 +27,7 @@ jobs:
           echo "test output" > report.md
           echo "\`\`\`" >> report.md
           cat test_output.txt >> report.md
-          echo "\`\`\`" > report.md
+          echo "\`\`\`" >> report.md
           echo "metrics from training" >> report.md
           cat metrics.csv >> report.md
           cml comment create --publish report.md
